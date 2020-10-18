@@ -1,5 +1,7 @@
 import sqlite3
 
+### TODO: Save passwords as salted-hash, not plaintext ###
+
 # connect to database file
 conn = sqlite3.connect('../data/dry_dock.db')
 c = conn.cursor()
@@ -34,6 +36,15 @@ c.execute("""CREATE TABLE Slips (
     boat_id integer,
     slip_id integer,
     location integer
+    )""")
+
+# sqlite3 has some quirks, such that the time_requested
+# is stored as text and completed as an INT (0 or 1)
+c.execute("""CREATE TABLE Requests (
+    request_id integer,
+    boat_id integer,
+    time_requested text,
+    completed integer
     )""")
 
 # push to .db file
