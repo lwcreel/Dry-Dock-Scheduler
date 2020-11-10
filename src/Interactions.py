@@ -32,18 +32,15 @@ def queueBoat(boatID, ownerID, timeRequested):
 
     return "Your request has been added to the queue! Request ID: " + str(rID)
 
-
-def dequeueBoat(boatID, requestID):
+# boatID not needed for only one boat per user
+def dequeueBoat(boatID, ownerID, requestID):
     # connect to database
     db = sqlite3.connect('../data/dry_dock.db')
     c  = db.cursor()
 
-    c.execute('Select Requests from dry_dock WHERE request_id=?', requestID)
+    # update database
+    c.execute('DELETE FROM Requests WHERE request_id=?', requestID)
+    c.execute('UPDATA Users SET request_id=NULL WHERE user_id=?', ownerID)
+    c.close()
 
-    if c.fetchone is not None:
-        
-    else:
-        return "Error: unknown request"
-
-
-
+    return "Your request has been completed, thank you for choosing our marina!"
