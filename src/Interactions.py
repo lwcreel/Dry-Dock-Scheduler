@@ -17,30 +17,33 @@ def login(email, pwd):
     else:
         return "Login failed"
 
+    c.close()
+
 def queueBoat(boatID, ownerID, timeRequested):
     # connect to database
     db = sqlite3.connect('../data/dry_dock.db')
     c  = db.cursor()
     rID  = randrange(10000000)
-
-    c.execute('Select Users from dry_dock WHERE user_id=?', ownerID)
-
-    if c.fetchone is not None:
         
-        # create row in request table
-        c.execute('INSERT INTO Requests VALUES (?,?,?,?)', (rID, boatID, timeRequested, 0))
+    # update database
+    c.execute('INSERT INTO Requests VALUES (?,?,?,?)', (rID, boatID, timeRequested, 0))
+    c.execute('UPDATE Users SET request_id=? WHERE user_id=?', rID, ownerID)
+    c.close()
 
-        # update user with request number
-        c.execute('UPDATE Users SET request_id=? WHERE user_id=?', rID, ownerID)
-
-        return "Your request has been added to the queue! Request ID: " + str(rID)
-    else:
-        return "ERROR: user not known"
-
-    
+    return "Your request has been added to the queue! Request ID: " + str(rID)
 
 
 def dequeueBoat(boatID, requestID):
-    pass
+    # connect to database
+    db = sqlite3.connect('../data/dry_dock.db')
+    c  = db.cursor()
+
+    c.execute('Select Requests from dry_dock WHERE request_id=?', requestID)
+
+    if c.fetchone is not None:
+        
+    else:
+        return "Error: unknown request"
+
 
 
