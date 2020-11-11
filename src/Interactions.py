@@ -36,7 +36,7 @@ def queueBoat(boatID, ownerID, timeRequested):
     return "Your request has been added to the queue! Request ID: " + str(rID)
 
 # boatID not needed for only one boat per user
-def dequeueBoat(boatID, ownerID, requestID, newLocation):
+def dequeueBoat(boatID, ownerID, requestID, location):
     # connect to database
     db = sqlite3.connect('../data/dry_dock.db')
     c  = db.cursor()
@@ -45,6 +45,8 @@ def dequeueBoat(boatID, ownerID, requestID, newLocation):
     c.execute('DELETE FROM Requests WHERE request_id=?', requestID)
     c.execute('UPDATE Users SET request_id=NULL WHERE user_id=?', ownerID)
     c.close()
+
+    clearSlip(location)
 
     return "Your request has been completed, thank you for choosing our marina!"
 
@@ -78,7 +80,16 @@ def createBoat(makeAndModel, ownerName, yearMade, dockLocation, ownerID):
 def moveBoat(boatID, newLocation):
     db = sqlite3.connect('../data/dry_dock.db')
     c  = db.cursor()
-
     c.execute('UPDATE Boats SET location=? WHERE id=?', newLocation, boatID)
+    c.close()
 
-    return "Boat moved successfully"
+    return "boat moved"
+
+# clear slip
+def clearSlip(location):
+    db = sqlite3.connect('../data/dry_dock.db')
+    c  = db.cursor()
+
+    c.execute('UPDATE Slips SET boat_id=NULL WHERE location=?', location)
+    c.close()
+    return "slip cleared"
