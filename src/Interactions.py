@@ -89,7 +89,7 @@ def moveBoat(boatID, newLocation):
 def clearSlip(location):
     db = sqlite3.connect('../data/dry_dock.db')
     c  = db.cursor()
-
     c.execute('UPDATE Slips SET boat_id=NULL WHERE location=?', location)
     c.close()
+
     return "slip cleared"
