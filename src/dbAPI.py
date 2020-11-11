@@ -93,3 +93,4 @@ def clearSlip(location):
     c.close()
 
     return "slip cleared"
+
