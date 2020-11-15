@@ -11,6 +11,8 @@ ScreenManagement:
     LinkBoat:
     ResetPassword:
     HomeScreenOwner:
+    HomeScreenWorker:
+    LogOutConfirmWorker:
     LogOutConfirmOwner:
 
 <Button>:
@@ -220,6 +222,7 @@ ScreenManagement:
             pos_hint: {"x":.05, "y":.314}
         Button:
             id: create_button
+            on_release: app.root.current = 'homeworker'
             text: 'Create Account'
             pos_hint: {"x":.306, "y":.2}
         Button:
@@ -315,6 +318,7 @@ ScreenManagement:
             pos_hint: {"x":.306, "y":.557}
         Button:
             id: log_in_button
+            on_release: app.root.current = 'homeworker'
             text: 'Log In'
             pos_hint: {"x":.306, "y":.471}
         Button:
@@ -481,6 +485,55 @@ ScreenManagement:
             on_release: app.root.current = 'confirmowner'
             text: 'Log out'
             pos_hint: {"x":.306, "y":.292}
+
+<HomeScreenWorker>:
+    name: 'homeworker'
+    FloatLayout:
+        Label:
+            id: home_title
+            text: 'Home'
+            color: 0,0,0,1
+            size_hint: .25,.25
+            pos_hint: {"x":.384, "y":.786}
+        Label:
+            id: home_message
+            text: 'What would you like to do today?'
+            color: 0,0,0,1
+            size_hint: .25, .25
+            pos_hint: {"x":.384, "y": .73}
+        Button:
+            id: schedule_button
+            text: 'View Schedule'
+            pos_hint: {"x":.306, "y": .55}
+        Button:
+            id: contact_button
+            text: 'View Open Chats'
+            pos_hint: {"x":.306, "y":.464}
+        Button:
+            id: log_out_button
+            on_release: app.root.current = 'confirmworker'
+            text: 'Log Out'
+            pos_hint: {"x":.306, "y":.378}
+
+<LogOutConfirmWorker>:
+    name: 'confirmworker'
+    FloatLayout:
+        Label:
+            id: confirm_title
+            text: 'Are you sure you want to log out?'
+            color: 0,0,0,1
+            size_hint: .25,.25
+            pos_hint: {"x":.384, "y":.786}
+        Button:
+            id: yes_button
+            on_release: app.root.current = 'welcome'
+            text: 'Yes'
+            pos_hint: {"x":.306, "y":.57}
+        Button:
+            id: no_button
+            on_release: app.root.current = 'homeworker'
+            text: 'No'
+            pos_hint: {"x":.306, "y":.473}
 
 <LogOutConfirmOwner>:
     name: 'confirmowner'

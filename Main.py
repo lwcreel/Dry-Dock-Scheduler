@@ -39,6 +39,12 @@ class ResetPassword(Screen):
 class HomeScreenOwner(Screen):
     pass
 
+class HomeScreenWorker(Screen):
+    pass
+
+class LogOutConfirmWorker(Screen):
+    pass
+
 class LogOutConfirmOwner(Screen):
     pass
 
