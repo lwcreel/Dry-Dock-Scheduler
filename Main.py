@@ -4,7 +4,6 @@ from kivy.core.window import Window
 from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
 
 Window.size = (500, 700)
-Window.clearcolor = (1,1,1,1)
 
 class WelcomeScreen(Screen):
     pass
