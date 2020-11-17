@@ -1,4 +1,5 @@
 import sqlite3
+import os.path
 
 ### TODO: Save passwords as salted-hash, not plaintext ###
 
@@ -9,7 +10,7 @@ c = conn.cursor()
 # commands to create tables, only run on re-deploy
 c.execute("""CREATE TABLE DryDock (
     slip_id integer,
-    request_id integer,
+    request_id integer
     )""")
 
 # users can have one boat and request (as of right now)

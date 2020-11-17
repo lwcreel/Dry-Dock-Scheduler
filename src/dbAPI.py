@@ -17,7 +17,7 @@ def login(email, pwd):
 
 
     # attempt to fetch corresponding User
-    c.execute('SELECT Users from dry_dock WHERE email=? AND password=?', email, pwd)
+    c.execute('SELECT Users from dry_dock WHERE email=? AND password=?', (email, pwd))
     if c.fetchone() is not None:
         return "Welcome"
     else:
@@ -33,7 +33,7 @@ def queueBoat(boatID, ownerID, timeRequested):
         
     # update database
     c.execute('INSERT INTO Requests VALUES (?,?,?,?)', (rID, boatID, timeRequested, 0))
-    c.execute('UPDATE Users SET request_id=? WHERE user_id=?', rID, ownerID)
+    c.execute('UPDATE Users SET request_id=? WHERE user_id=?', (rID, ownerID))
     c.close()
 
     return "Your request has been added to the queue! Request ID: " + str(rID)
@@ -73,8 +73,8 @@ def createBoat(makeAndModel, ownerName, yearMade, dockLocation, ownerID):
     bID = randrange(10000000)
 
     # update database
-    c.execute('INSERT INTO Boats VALUES (?,?,?,?,?)', makeAndModel, ownerName, bID, yearMade, dockLocation)
-    c.execute('UPDATE Users SET boat_id=? WHERE user_id=?', bID, ownerID)
+    c.execute('INSERT INTO Boats VALUES (?,?,?,?,?)', (makeAndModel, ownerName, bID, yearMade, dockLocation))
+    c.execute('UPDATE Users SET boat_id=? WHERE user_id=?', (bID, ownerID))
     c.close()
 
     return "Success! Boat linked to your account"
@@ -83,7 +83,7 @@ def createBoat(makeAndModel, ownerName, yearMade, dockLocation, ownerID):
 def moveBoat(boatID, newLocation):
     db = sqlite3.connect(path)
     c  = db.cursor()
-    c.execute('UPDATE Boats SET location=? WHERE id=?', newLocation, boatID)
+    c.execute('UPDATE Boats SET location=? WHERE id=?', (newLocation, boatID))
     c.close()
 
     return "boat moved"
