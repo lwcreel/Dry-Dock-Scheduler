@@ -15,7 +15,6 @@ def login(email, pwd):
     db = sqlite3.connect(path)
     c  = db.cursor()
 
-
     # attempt to fetch corresponding User
     c.execute('SELECT Users from dry_dock WHERE email=? AND password=?', (email, pwd))
     if c.fetchone() is not None:
@@ -23,7 +22,8 @@ def login(email, pwd):
     else:
         return "Login failed"
 
-    c.close()
+    db.commit() 
+    db.close()
 
 def queueBoat(boatID, ownerID, timeRequested):
     # connect to database
@@ -34,7 +34,8 @@ def queueBoat(boatID, ownerID, timeRequested):
     # update database
     c.execute('INSERT INTO Requests VALUES (?,?,?,?)', (rID, boatID, timeRequested, 0))
     c.execute('UPDATE Users SET request_id=? WHERE user_id=?', (rID, ownerID))
-    c.close()
+    db.commit() 
+    db.close()
 
     return "Your request has been added to the queue! Request ID: " + str(rID)
 
@@ -47,7 +48,8 @@ def dequeueBoat(boatID, ownerID, requestID, location):
     # update database
     c.execute('DELETE FROM Requests WHERE request_id=?', requestID)
     c.execute('UPDATE Users SET request_id=NULL WHERE user_id=?', ownerID)
-    c.close()
+    db.commit() 
+    db.close()
 
     clearSlip(location)
 
@@ -57,11 +59,13 @@ def dequeueBoat(boatID, ownerID, requestID, location):
 def createUser(name, email, pwd):
     # connect to database
     db = sqlite3.connect(path)
+    db.set_trace_callback(print)
     c  = db.cursor()
     uID = randrange(10000000)
 
     c.execute('INSERT INTO Users (name, email, password, user_id) VALUES (?,?,?,?)', (name, email, pwd, uID)) # change to hash
-    c.close()
+    db.commit() 
+    db.close()
 
     return "Success! User created successfully"
 
@@ -75,7 +79,8 @@ def createBoat(makeAndModel, ownerName, yearMade, dockLocation, ownerID):
     # update database
     c.execute('INSERT INTO Boats VALUES (?,?,?,?,?)', (makeAndModel, ownerName, bID, yearMade, dockLocation))
     c.execute('UPDATE Users SET boat_id=? WHERE user_id=?', (bID, ownerID))
-    c.close()
+    db.commit() 
+    db.close()
 
     return "Success! Boat linked to your account"
 
@@ -84,7 +89,8 @@ def moveBoat(boatID, newLocation):
     db = sqlite3.connect(path)
     c  = db.cursor()
     c.execute('UPDATE Boats SET location=? WHERE id=?', (newLocation, boatID))
-    c.close()
+    db.commit() 
+    db.close()
 
     return "boat moved"
 
@@ -93,7 +99,8 @@ def clearSlip(location):
     db = sqlite3.connect(path)
     c  = db.cursor()
     c.execute('UPDATE Slips SET boat_id=NULL WHERE location=?', location)
-    c.close()
+    db.commit() 
+    db.close()
 
     return "slip cleared"
 
