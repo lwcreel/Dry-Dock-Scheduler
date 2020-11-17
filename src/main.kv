@@ -355,7 +355,8 @@ ScreenManagement:
             pos_hint: {"x":.306, "y":.557}
         Button:
             id: log_in_button
-            on_release: app.root.current = 'homeworker'
+            on_press: app.tryLogin(username_input.text, password_input.text, 1)
+            on_release: app.root.current = app.loginNextScreen
             text: 'Log In'
             pos_hint: {"x":.306, "y":.471}
         Button:

@@ -62,9 +62,15 @@ class MainApp(App):
         val = login(nameText, passwordText, isWorker)
         print(val)
         if(val):
-            self.loginNextScreen = 'homeowner'
+            if(isWorker):
+                self.loginNextScreen = 'homeworker'
+            else:
+                self.loginNextScreen = 'homeowner'
         else:
-            self.loginNextScreen = 'loginowner'
+            if(isWorker):
+                self.loginNextScreen = 'loginworker'
+            else:
+                self.loginNextScreen = 'loginowner'
 
     def build(self):
         return presentation
