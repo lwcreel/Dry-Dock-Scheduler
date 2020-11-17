@@ -1,8 +1,10 @@
 import sqlite3
+import os.path
 
 from datetime import datetime
 from random import randrange
 
+path = os.path.abspath('../data/dry_dock.db')
 
 # DO NOT LET THIS GO TO PRODUCTION W/O STORING PWDS AS SALTED HASHES
 
@@ -10,8 +12,9 @@ from random import randrange
 def login(email, pwd):
 
     # connect to database
-    db = sqlite3.connect('../data/dry_dock.db')
+    db = sqlite3.connect(path)
     c  = db.cursor()
+
 
     # attempt to fetch corresponding User
     c.execute('SELECT Users from dry_dock WHERE email=? AND password=?', email, pwd)
@@ -24,7 +27,7 @@ def login(email, pwd):
 
 def queueBoat(boatID, ownerID, timeRequested):
     # connect to database
-    db = sqlite3.connect('../data/dry_dock.db')
+    db = sqlite3.connect(path)
     c  = db.cursor()
     rID  = randrange(10000000)
         
@@ -38,7 +41,7 @@ def queueBoat(boatID, ownerID, timeRequested):
 # boatID not needed for only one boat per user
 def dequeueBoat(boatID, ownerID, requestID, location):
     # connect to database
-    db = sqlite3.connect('../data/dry_dock.db')
+    db = sqlite3.connect(path)
     c  = db.cursor()
 
     # update database
@@ -53,11 +56,11 @@ def dequeueBoat(boatID, ownerID, requestID, location):
 # create user
 def createUser(name, email, pwd):
     # connect to database
-    db = sqlite3.connect('../data/dry_dock.db')
+    db = sqlite3.connect(path)
     c  = db.cursor()
     uID = randrange(10000000)
 
-    c.execute('INSERT INTO Users (name, email, password, user_id) VALUES (?,?,?,?)', name, email, pwd, uID) # change to hash
+    c.execute('INSERT INTO Users (name, email, password, user_id) VALUES (?,?,?,?)', (name, email, pwd, uID)) # change to hash
     c.close()
 
     return "Success! User created successfully"
@@ -65,7 +68,7 @@ def createUser(name, email, pwd):
 # create boat
 def createBoat(makeAndModel, ownerName, yearMade, dockLocation, ownerID):
     # connect to database
-    db = sqlite3.connect('../data/dry_dock.db')
+    db = sqlite3.connect(path)
     c  = db.cursor()
     bID = randrange(10000000)
 
@@ -78,7 +81,7 @@ def createBoat(makeAndModel, ownerName, yearMade, dockLocation, ownerID):
 
 # move boat to new slip
 def moveBoat(boatID, newLocation):
-    db = sqlite3.connect('../data/dry_dock.db')
+    db = sqlite3.connect(path)
     c  = db.cursor()
     c.execute('UPDATE Boats SET location=? WHERE id=?', newLocation, boatID)
     c.close()
@@ -87,7 +90,7 @@ def moveBoat(boatID, newLocation):
 
 # clear slip
 def clearSlip(location):
-    db = sqlite3.connect('../data/dry_dock.db')
+    db = sqlite3.connect(path)
     c  = db.cursor()
     c.execute('UPDATE Slips SET boat_id=NULL WHERE location=?', location)
     c.close()
