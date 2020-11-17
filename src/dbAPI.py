@@ -9,14 +9,14 @@ path = os.path.abspath('../data/dry_dock.db')
 # DO NOT LET THIS GO TO PRODUCTION W/O STORING PWDS AS SALTED HASHES
 
 # script for login 
-def login(email, pwd):
+def login(name, pwd):
 
     # connect to database
     db = sqlite3.connect(path)
     c  = db.cursor()
 
     # attempt to fetch corresponding User
-    c.execute('SELECT Users from dry_dock WHERE email=? AND password=?', (email, pwd))
+    c.execute('SELECT Users from dry_dock WHERE name=? AND password=?', (name, pwd))
     if c.fetchone() is not None:
         return "Welcome"
     else:
