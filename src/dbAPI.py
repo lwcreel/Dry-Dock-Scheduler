@@ -18,9 +18,9 @@ def login(name, pwd):
     # attempt to fetch corresponding User
     c.execute('SELECT Users from dry_dock WHERE name=? AND password=?', (name, pwd))
     if c.fetchone() is not None:
-        return "Welcome"
+        return True
     else:
-        return "Login failed"
+        return False
 
     db.commit() 
     db.close()
