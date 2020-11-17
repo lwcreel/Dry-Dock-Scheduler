@@ -58,8 +58,8 @@ class MainApp(App):
     def createAccount(self, nameText, emailText, passwordText):
         createUser(nameText, emailText, passwordText)
 
-    def tryLogin(self, nameText, passwordText):
-        val = login(nameText, passwordText)
+    def tryLogin(self, nameText, passwordText, isWorker):
+        val = login(nameText, passwordText, isWorker)
         print(val)
         if(val):
             self.loginNextScreen = 'homeowner'

@@ -9,14 +9,14 @@ path = os.path.abspath('../data/dry_dock.db')
 # DO NOT LET THIS GO TO PRODUCTION W/O STORING PWDS AS SALTED HASHES
 
 # script for login 
-def login(name, pwd):
+def login(name, pwd, is_worker):
 
     # connect to database
     db = sqlite3.connect(path)
     c  = db.cursor()
 
     # attempt to fetch corresponding User
-    c.execute('SELECT name, password FROM Users WHERE name=? AND password=?', (name, pwd))
+    c.execute('SELECT name, password, is_worker FROM Users WHERE name=? AND password=? AND is_worker=?', (name, pwd, is_worker))
     if c.fetchone() is not None:
         return True
     else:
@@ -63,11 +63,25 @@ def createUser(name, email, pwd):
     c  = db.cursor()
     uID = randrange(10000000)
 
-    c.execute('INSERT INTO Users (name, email, password, user_id) VALUES (?,?,?,?)', (name, email, pwd, uID)) # change to hash
+    c.execute('INSERT INTO Users (name, email, password, user_id, is_worker) VALUES (?,?,?,?,0)', (name, email, pwd, uID)) # change to hash
     db.commit() 
     db.close()
 
     return "Success! User created successfully"
+
+def createWorker(name, email, pwd):
+    # connect to database
+    db = sqlite3.connect(path)
+    db.set_trace_callback(print)
+    c  = db.cursor()
+    uID = randrange(10000000)
+
+    c.execute('INSERT INTO Users (name, email, password, user_id, is_worker) VALUES (?,?,?,?,1)', (name, email, pwd, uID)) # change to hash
+    db.commit() 
+    db.close()
+
+    return "Success! User created successfully"
+
 
 # create boat
 def createBoat(makeAndModel, ownerName, yearMade, dockLocation, ownerID):

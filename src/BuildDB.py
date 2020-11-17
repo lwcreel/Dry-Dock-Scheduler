@@ -20,7 +20,8 @@ c.execute("""CREATE TABLE Users (
     password text,
     user_id integer,
     boat_id integer,
-    request_id integer
+    request_id integer,
+    is_worker integer
     )""")
 
 # boats have one owner and one location
