@@ -16,7 +16,7 @@ def login(name, pwd):
     c  = db.cursor()
 
     # attempt to fetch corresponding User
-    c.execute('SELECT Users from dry_dock WHERE name=? AND password=?', (name, pwd))
+    c.execute('SELECT name, password FROM Users WHERE name=? AND password=?', (name, pwd))
     if c.fetchone() is not None:
         return True
     else:

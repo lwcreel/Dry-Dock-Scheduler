@@ -54,8 +54,17 @@ class ScreenManagement(ScreenManager):
 presentation = Builder.load_file("main.kv")
 
 class MainApp(App):
+    loginNextScreen = ''
     def createAccount(self, nameText, emailText, passwordText):
         createUser(nameText, emailText, passwordText)
+
+    def tryLogin(self, nameText, passwordText):
+        val = login(nameText, passwordText)
+        print(val)
+        if(val):
+            self.loginNextScreen = 'homeowner'
+        else:
+            self.loginNextScreen = 'loginowner'
 
     def build(self):
         return presentation
