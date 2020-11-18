@@ -55,12 +55,22 @@ presentation = Builder.load_file("main.kv")
 
 class MainApp(App):
     loginNextScreen = ''
-    def createAccount(self, nameText, emailText, passwordText):
-        createUser(nameText, emailText, passwordText)
+    createNextScreen = ''
+    def createAccount(self, nameText, emailText, passwordText, confirmPasswordText, isWorker):
+        val = createUser(nameText, emailText, passwordText, confirmPasswordText, isWorker)
+        if(val):
+            if(isWorker):
+                self.createNextScreen = 'homeworker'
+            else:
+                self.createNextScreen - 'newlink'
+        else:
+            if(isWorker):
+                self.createNextScreen = 'createworker'
+            else:
+                self.createNextScreen = 'createowner'
 
     def tryLogin(self, nameText, passwordText, isWorker):
         val = login(nameText, passwordText, isWorker)
-        print(val)
         if(val):
             if(isWorker):
                 self.loginNextScreen = 'homeworker'

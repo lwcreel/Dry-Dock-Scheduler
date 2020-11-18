@@ -56,19 +56,30 @@ def dequeueBoat(boatID, ownerID, requestID, location):
     return "Your request has been completed, thank you for choosing our marina!"
 
 # create user
-def createUser(name, email, pwd):
+def createUser(name, email, pwd, cpwd, isWorker):
     # connect to database
     db = sqlite3.connect(path)
     db.set_trace_callback(print)
     c  = db.cursor()
     uID = randrange(10000000)
-
-    c.execute('INSERT INTO Users (name, email, password, user_id, is_worker) VALUES (?,?,?,?,0)', (name, email, pwd, uID)) # change to hash
-    db.commit() 
-    db.close()
-
-    return "Success! User created successfully"
-
+    c.execute('SELECT name, email FROM Users WHERE name=? OR email=?', (name, email))
+    if c.selectone() is not None:
+        return False
+    else:
+        if (pwd == cpwd):
+            if (isWorker):
+                c.execute('INSERT INTO Users (name, email, password, user_id, is_worker) VALUES (?,?,?,?,1)', (name, email, pwd, uID)) # change to hash
+                db.commit() 
+                db.close()
+                return True
+            else:
+                c.execute('INSERT INTO Users (name, email, password, user_id, is_worker) VALUES (?,?,?,?,0)', (name, email, pwd, uID)) # change to hash
+                db.commit() 
+                db.close()
+                return True
+        else:
+            return False
+#might be unnecessary, tried to merge with createUser
 def createWorker(name, email, pwd):
     # connect to database
     db = sqlite3.connect(path)
