@@ -55,23 +55,15 @@ presentation = Builder.load_file("main.kv")
 
 class MainApp(App):
     loginNextScreen = ''
-    createNextScreen = ''
-    def createAccount(self, nameText, emailText, passwordText, confirmPasswordText, isWorker):
-        val = createUser(nameText, emailText, passwordText, confirmPasswordText, isWorker)
-        if(val):
-            if(isWorker):
-                self.createNextScreen = 'homeworker'
-            else:
-                self.createNextScreen - 'newlink'
-        else:
-            if(isWorker):
-                self.createNextScreen = 'createworker'
-            else:
-                self.createNextScreen = 'createowner'
+    name = ''
+    def createAccount(self, nameText, emailText, passwordText):
+        createUser(nameText, emailText, passwordText)
 
     def tryLogin(self, nameText, passwordText, isWorker):
         val = login(nameText, passwordText, isWorker)
+        print(val)
         if(val):
+            name = nameText
             if(isWorker):
                 self.loginNextScreen = 'homeworker'
             else:
@@ -81,6 +73,13 @@ class MainApp(App):
                 self.loginNextScreen = 'loginworker'
             else:
                 self.loginNextScreen = 'loginowner'
+
+    priorityQueue = []
+    counter = itertools.count()
+    def schedule(self, boatText, timeValue)
+        queueBoat(boatText, name, timeValue)
+        count = next(counter)
+        heappush(priorityQueue, (timeValue, count, [boatText, name]))
 
     def build(self):
         return presentation
