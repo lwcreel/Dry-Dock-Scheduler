@@ -2,11 +2,11 @@ from kivy.app import App
 from kivy.lang import Builder
 from kivy.core.window import Window
 from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
-from kivy.uix.spinner import Spinner
-from itertools import *
+
 from dbAPI import *
 
 Window.size = (500, 700)
+
 
 class WelcomeScreen(Screen):
     pass
@@ -26,7 +26,13 @@ class CreateAccountWorker(Screen):
 class LogInOwner(Screen):
     pass
 
+class LogInOwnerFailed(Screen):
+    pass
+
 class LogInWorker(Screen):
+    pass
+
+class LogInWorkerFailed(Screen):
     pass
 
 class NewAccountLinkBoat(Screen):
@@ -56,16 +62,16 @@ class ScheduleTime(Screen):
 class ScreenManagement(ScreenManager):
     pass
 
+
+
 presentation = Builder.load_file("main.kv")
 
 class MainApp(App):
     loginNextScreen = ''
     createNextScreen = ''
-    name = ''
     def createAccount(self, nameText, emailText, passwordText, confirmPasswordText, isWorker):
         val = createUser(nameText, emailText, passwordText, confirmPasswordText, isWorker)
         if(val):
-            name = nameText
             if(isWorker):
                 self.createNextScreen = 'homeworker'
             else:
@@ -79,19 +85,19 @@ class MainApp(App):
     def tryLogin(self, nameText, passwordText, isWorker):
         val = login(nameText, passwordText, isWorker)
         if(val):
-            name = nameText
             if(isWorker):
                 self.loginNextScreen = 'homeworker'
             else:
                 self.loginNextScreen = 'homeowner'
         else:
             if(isWorker):
-                self.loginNextScreen = 'loginworker'
+                self.loginNextScreen = 'loginworkerfailed'
             else:
-                self.loginNextScreen = 'loginowner'
-
+                self.loginNextScreen = 'loginownerfailed'
 
     def build(self):
         return presentation
+
+
 
 MainApp().run()

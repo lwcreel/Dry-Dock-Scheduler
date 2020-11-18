@@ -6,7 +6,9 @@ ScreenManagement:
     CreateAccountOwner:
     CreateAccountWorker:
     LogInOwner:
+    LogInOwnerFailed:
     LogInWorker:
+    LogInWorkerFailed:
     NewAccountLinkBoat:
     LinkBoat:
     ResetPassword:
@@ -318,6 +320,67 @@ ScreenManagement:
             text: 'Back'
             pos_hint: {"x":.306, "y":.385}
 
+<LogInOwnerFailed>:
+    name: 'loginownerfailed'
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'background.jpg'
+    FloatLayout:
+        Label:
+            id: login_title
+            text: 'Log In'
+            color: 0,0,0,1
+            size_hint: .25, .25
+            pos_hint: {"x":.384, "y":.786}
+        Label:
+            id: username_tag
+            text: 'Username'
+            color: 0,0,0,1
+            size_hint: .25, .25
+            pos_hint: {"x":0, "y":.714}
+        TextInput:
+            id: username_input
+            hint_text: 'Enter username'
+            size_hint: .9, .05
+            pos_hint: {"x":.05, "y":.771}
+        Label:
+            id: password_tag
+            text: 'Password'
+            color: 0,0,0,1
+            size_hint: .25, .25
+            pos_hint: {"x":.02, "y":.6}
+        TextInput:
+            id: password_input
+            password: True
+            hint_text: 'Enter password'
+            size_hint: .9, .05
+            pos_hint: {"x":.05, "y":.657}
+        Button:
+            id: reset_button
+            on_release: app.root.current = 'reset'
+            text: 'Forgot your password?'
+            font_size: 19
+            pos_hint: {"x":.306, "y":.557}
+        Button:
+            id: log_in_button
+            on_press: app.tryLogin(username_input.text, password_input.text, 0)
+            on_release: app.root.current = app.loginNextScreen
+            text: 'Log In'
+            pos_hint: {"x":.306, "y":.471}
+        Button:
+            id: return_button
+            on_release: app.root.current = 'welcome'
+            text: 'Back'
+            pos_hint: {"x":.306, "y":.385}
+        Label:
+            id: flash_notice
+            text: 'Login Failed'
+            color: 1,0,0,1
+            size_hint: .25, .25
+            pos_hint: {"x":0.3, "y":.2}
+
 <LogInWorker>:
     name: 'loginworker'
     canvas.before:
@@ -372,6 +435,67 @@ ScreenManagement:
             on_release: app.root.current = 'welcome'
             text: 'Back'
             pos_hint: {"x":.306, "y":.385}
+
+<LogInWorkerFailed>:
+    name: 'loginworkerfailed'
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'background.jpg'
+    FloatLayout:
+        Label:
+            id: login_title
+            text: 'Log In'
+            color: 0,0,0,1
+            size_hint: .25, .25
+            pos_hint: {"x":.384, "y":.786}
+        Label:
+            id: username_tag
+            text: 'Username'
+            color: 0,0,0,1
+            size_hint: .25, .25
+            pos_hint: {"x":0, "y":.714}
+        TextInput:
+            id: username_input
+            hint_text: 'Enter username'
+            size_hint: .9, .05
+            pos_hint: {"x":.05, "y":.771}
+        Label:
+            id: password_tag
+            text: 'Password'
+            color: 0,0,0,1
+            size_hint: .25, .25
+            pos_hint: {"x":.02, "y":.6}
+        TextInput:
+            id: password_input
+            password: True
+            hint_text: 'Enter password'
+            size_hint: .9, .05
+            pos_hint: {"x":.05, "y":.657}
+        Button:
+            id: reset_button
+            on_release: app.root.current = 'reset'
+            text: 'Forgot your password?'
+            font_size: 19
+            pos_hint: {"x":.306, "y":.557}
+        Button:
+            id: log_in_button
+            on_press: app.tryLogin(username_input.text, password_input.text, 1)
+            on_release: app.root.current = app.loginNextScreen
+            text: 'Log In'
+            pos_hint: {"x":.306, "y":.471}
+        Button:
+            id: return_button
+            on_release: app.root.current = 'welcome'
+            text: 'Back'
+            pos_hint: {"x":.306, "y":.385}        
+        Label:
+            id: flash_notice
+            text: 'Login Failed'
+            color: 1,0,0,1
+            size_hint: .25, .25
+            pos_hint: {"x":0.3, "y":.2}
 
 <NewAccountLinkBoat>:
     name: 'newlink'
