@@ -6,6 +6,9 @@ from dbAPI import *
 
 Window.size = (500, 700)
 
+class ScheduleTime(Screen):
+    pass
+
 class WelcomeScreen(Screen):
     pass
 
