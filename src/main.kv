@@ -169,7 +169,7 @@ ScreenManagement:
             pos_hint: {"x":.05, "y":.429}
         Button:
             id: create_button
-            on_press: app.createAccount('testname', 'testemail', 'testpassword')
+            on_press: app.createAccount(username_input.text, e_mail_input.text, password_input.text)
             on_release: app.root.current = 'newlink'
             text: 'Create Account'
             pos_hint: {"x":.306, "y":.286}
@@ -252,6 +252,7 @@ ScreenManagement:
             pos_hint: {"x":.05, "y":.314}
         Button:
             id: create_button
+            on_press: app.createAccount(username_input.text, e_mail_input.text, password_input.text)
             on_release: app.root.current = 'homeworker'
             text: 'Create Account'
             pos_hint: {"x":.306, "y":.2}
