@@ -76,7 +76,7 @@ class MainApp(App):
 
     priorityQueue = []
     counter = itertools.count()
-    def schedule(self, boatText, timeValue)
+    def schedule(self, boatText, timeValue):
         queueBoat(boatText, name, timeValue)
         count = next(counter)
         heappush(priorityQueue, (timeValue, count, [boatText, name]))
