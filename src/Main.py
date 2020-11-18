@@ -2,6 +2,8 @@ from kivy.app import App
 from kivy.lang import Builder
 from kivy.core.window import Window
 from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
+from kivy.uix.spinner import Spinner
+from itertools import *
 from dbAPI import *
 
 Window.size = (500, 700)
@@ -48,6 +50,9 @@ class LogOutConfirmWorker(Screen):
 class LogOutConfirmOwner(Screen):
     pass
 
+class ScheduleTime(Screen):
+    pass
+
 class ScreenManagement(ScreenManager):
     pass
 
@@ -56,13 +61,15 @@ presentation = Builder.load_file("main.kv")
 class MainApp(App):
     loginNextScreen = ''
     createNextScreen = ''
+    name = ''
     def createAccount(self, nameText, emailText, passwordText, confirmPasswordText, isWorker):
         val = createUser(nameText, emailText, passwordText, confirmPasswordText, isWorker)
         if(val):
+            name = nameText
             if(isWorker):
                 self.createNextScreen = 'homeworker'
             else:
-                self.createNextScreen - 'newlink'
+                self.createNextScreen = 'newlink'
         else:
             if(isWorker):
                 self.createNextScreen = 'createworker'
@@ -72,6 +79,7 @@ class MainApp(App):
     def tryLogin(self, nameText, passwordText, isWorker):
         val = login(nameText, passwordText, isWorker)
         if(val):
+            name = nameText
             if(isWorker):
                 self.loginNextScreen = 'homeworker'
             else:
@@ -81,6 +89,7 @@ class MainApp(App):
                 self.loginNextScreen = 'loginworker'
             else:
                 self.loginNextScreen = 'loginowner'
+
 
     def build(self):
         return presentation

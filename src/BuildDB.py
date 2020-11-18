@@ -4,7 +4,7 @@ import os.path
 ### TODO: Save passwords as salted-hash, not plaintext ###
 
 # connect to database file
-conn = sqlite3.connect('../data/dry_dock.db')
+conn = sqlite3.connect('dry_dock.db')
 c = conn.cursor()
 
 # commands to create tables, only run on re-deploy

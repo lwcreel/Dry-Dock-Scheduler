@@ -4,7 +4,7 @@ import os.path
 from datetime import datetime
 from random import randrange
 
-path = os.path.abspath('../data/dry_dock.db')
+path = os.path.abspath('dry_dock.db')
 
 # DO NOT LET THIS GO TO PRODUCTION W/O STORING PWDS AS SALTED HASHES
 
@@ -63,7 +63,7 @@ def createUser(name, email, pwd, cpwd, isWorker):
     c  = db.cursor()
     uID = randrange(10000000)
     c.execute('SELECT name, email FROM Users WHERE name=? OR email=?', (name, email))
-    if c.selectone() is not None:
+    if c.fetchone() is not None:
         return False
     else:
         if (pwd == cpwd):
