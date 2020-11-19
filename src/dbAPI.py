@@ -95,7 +95,7 @@ def createWorker(name, email, pwd):
 
 
 # create boat
-def createBoat(makeAndModel, ownerName, yearMade, dockLocation, ownerID):
+def createBoat(makeAndModel, ownerName, yearMade, dockLocation):
     # connect to database
     db = sqlite3.connect(path)
     c  = db.cursor()
@@ -103,11 +103,11 @@ def createBoat(makeAndModel, ownerName, yearMade, dockLocation, ownerID):
 
     # update database
     c.execute('INSERT INTO Boats VALUES (?,?,?,?,?)', (makeAndModel, ownerName, bID, yearMade, dockLocation))
-    c.execute('UPDATE Users SET boat_id=? WHERE user_id=?', (bID, ownerID))
+    c.execute('UPDATE Users SET boat_id=? WHERE name=?', (bID, ownerName))
     db.commit() 
     db.close()
 
-    return "Success! Boat linked to your account"
+    return bID
 
 # move boat to new slip
 def moveBoat(boatID, newLocation):

@@ -11,6 +11,7 @@ ScreenManagement:
     LogInWorkerFailed:
     NewAccountLinkBoat:
     LinkBoat:
+    LinkConfirm:
     ResetPassword:
     HomeScreenOwner:
     HomeScreenWorker:
@@ -518,30 +519,31 @@ ScreenManagement:
             size_hint: .25, .25
             pos_hint: {"x":.384, "y":.73}
         Label:
-            id: marina_tag
-            text: 'Marina Name'
+            id: make_model_tag
+            text: 'Make and model'
             color: 0,0,0,1
             size_hint: .25, .25
             pos_hint: {"x":.035, "y":.68}
         TextInput:
-            id: marina_input
-            hint_text: 'Enter marina name'
+            id: make_model_input
+            hint_text: 'Make and Model'
             size_hint: .9, .05
             pos_hint: {"x":.05, "y":.737}
         Label:
-            id: tag_tag
-            text: 'Boat Tag'
+            id: year_tag
+            text: 'Year'
             color: 0,0,0,1
             size_hint: .25, .25
             pos_hint: {"x":0, "y":.566}
         TextInput:
-            id: tag_input
-            hint_text: 'Enter boat tag'
+            id: year_input
+            hint_text: 'Year'
             size_hint: .9, .05
             pos_hint: {"x":.05, "y":.623}
         Button:
             id: link_button
-            on_release: app.root.current = 'homeowner'
+            on_press: app.linkBoat(make_model_input.text, year_input.text)
+            on_release: app.root.current = 'linkconfirm'
             text: 'Link Boat to Account'
             pos_hint: {"x":.306, "y":.523}
         Button:
@@ -570,36 +572,57 @@ ScreenManagement:
             size_hint: .25, .25
             pos_hint: {"x":.384, "y":.73}
         Label:
-            id: marina_tag
-            text: 'Marina Name'
+            id: make_model_tag
+            text: 'Make and model'
             color: 0,0,0,1
             size_hint: .25, .25
             pos_hint: {"x":.035, "y":.68}
         TextInput:
-            id: marina_input
-            hint_text: 'Enter marina name'
+            id: make_model_input
+            hint_text: 'Make and Model'
             size_hint: .9, .05
             pos_hint: {"x":.05, "y":.737}
         Label:
-            id: tag_tag
-            text: 'Boat Tag'
+            id: year_tag
+            text: 'Year'
             color: 0,0,0,1
             size_hint: .25, .25
             pos_hint: {"x":0, "y":.566}
         TextInput:
-            id: tag_input
-            hint_text: 'Enter boat tag'
+            id: year_input
+            hint_text: 'Year'
             size_hint: .9, .05
             pos_hint: {"x":.05, "y":.623}
         Button:
             id: link_button
-            on_release: app.root.current = 'homeowner'
+            on_press: app.linkBoat(make_model_input.text, year_input.text)
+            on_release: app.root.current = 'linkconfirm'
             text: 'Link Boat to Account'
             pos_hint: {"x":.306, "y":.523}
         Button:
             id: return_button
             on_release: app.root.current = 'homeowner'
             text: 'Back to Home'
+            pos_hint: {"x":.306, "y":.437}
+
+<LinkConfirm>:
+    name: 'linkconfirm'
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'background.jpg'
+    FloatLayout:
+        Label:
+            id: confirm_message1
+            text: 'Your boat has been linked!'
+            color: 0,0,0,1
+            size_hint: .25, .25
+            pos_hint: {"x":.384, "y":.786}
+        Button:
+            id: return_button
+            on_release: app.root.current = 'homeowner'
+            text: 'Continue'
             pos_hint: {"x":.306, "y":.437}
 
 <ResetPassword>:
@@ -659,6 +682,7 @@ ScreenManagement:
             pos_hint: {"x":.384, "y": .73}
         Button:
             id: schedule_button
+            on_release: app.root.current = 'scheduletime'
             text: 'Schedule a time'
             pos_hint: {"x":.306, "y": .55}
         Button:

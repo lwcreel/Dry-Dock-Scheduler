@@ -2,6 +2,7 @@ from kivy.app import App
 from kivy.lang import Builder
 from kivy.core.window import Window
 from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
+from kivy.properties import *
 
 from dbAPI import *
 
@@ -41,6 +42,9 @@ class NewAccountLinkBoat(Screen):
 class LinkBoat(Screen):
     pass
 
+class LinkConfirm(Screen):
+    pass
+
 class ResetPassword(Screen):
     pass
 
@@ -69,9 +73,12 @@ presentation = Builder.load_file("main.kv")
 class MainApp(App):
     loginNextScreen = ''
     createNextScreen = ''
+    username = ''
+    bid = -1
     def createAccount(self, nameText, emailText, passwordText, confirmPasswordText, isWorker):
         val = createUser(nameText, emailText, passwordText, confirmPasswordText, isWorker)
         if(val):
+            self.username = nameText
             if(isWorker):
                 self.createNextScreen = 'homeworker'
             else:
@@ -85,6 +92,7 @@ class MainApp(App):
     def tryLogin(self, nameText, passwordText, isWorker):
         val = login(nameText, passwordText, isWorker)
         if(val):
+            self.username = nameText
             if(isWorker):
                 self.loginNextScreen = 'homeworker'
             else:
@@ -94,6 +102,9 @@ class MainApp(App):
                 self.loginNextScreen = 'loginworkerfailed'
             else:
                 self.loginNextScreen = 'loginownerfailed'
+
+    def linkBoat(self, makeAndModel, year):
+        createBoat(makeAndModel, self.username, year, 0)
 
     def build(self):
         return presentation
