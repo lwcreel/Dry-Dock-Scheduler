@@ -110,10 +110,17 @@ class MainApp(App):
 
     priorityQueue = []
     counter = itertools.count()
-    def schedule(self, boatText, nameText, timeValue):
-        queueBoat(boatText, nameText, timeValue)
+    def schedule(self, timeValue):
+        queueBoat(self.bid, self.username, timeValue)
+        timeCalc = timeValue.split(':')
+        print (timeCalc[0] + ' ' + timeCalc[1])
+        if timeCalc[1][2] == 'p' and timeCalc[0] != '12':
+            time = str((int(timeCalc[0])+12)) + timeCalc[1][:2]
+        else:
+            time = timeCalc[0] + timeCalc[1][:2]
         count = next(self.counter)
-        heapq.heappush(self.priorityQueue, (timeValue, count, [boatText, nameText]))
+        heapq.heappush(self.priorityQueue, (time, count, [self.bid, self.username]))
+
 
     def build(self):
         return presentation
