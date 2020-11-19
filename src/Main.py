@@ -70,6 +70,9 @@ class LogOutConfirmOwner(Screen):
 class ScheduleTime(Screen):
     pass
 
+class ScheduleWorker(Screen):
+    pass
+
 class ScreenManagement(ScreenManager):
     pass
 
@@ -116,11 +119,10 @@ class MainApp(App):
     def schedule(self, timeValue):
         queueBoat(self.bid, self.username, timeValue)
         timeCalc = timeValue.split(':')
-        print (timeCalc[0] + ' ' + timeCalc[1])
         if timeCalc[1][2] == 'p' and timeCalc[0] != '12':
-            time = str((int(timeCalc[0])+12)) + timeCalc[1][:2]
+            time = int(str((int(timeCalc[0])+12)) + timeCalc[1][:2])
         else:
-            time = timeCalc[0] + timeCalc[1][:2]
+            time = int(timeCalc[0] + timeCalc[1][:2])
         count = next(self.counter)
         heapq.heappush(self.priorityQueue, (time, count, [self.bid, self.username]))
 
