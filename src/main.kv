@@ -24,6 +24,10 @@ ScreenManagement:
     font_size: 20
     size_hint: .4, .05
 
+<QueueLabel@Label>:
+    color: 0,0,0,1
+    size_hint: .25, .05
+
 <WelcomeScreen>:
     name: 'welcome'
     canvas.before:
@@ -840,4 +844,38 @@ ScreenManagement:
             text: 'Schedule'
             color: 0,0,0,1
             size_hint: .25, .25
+            font_size: 40
             pos_hint: {"x":.384, "y":.786}
+        GridLayout:
+            canvas.before:
+                Color:
+                    rgba: 1,1,1,1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            id: schedulequeue
+            rows: 15
+            cols: 4
+            row_force_default: True
+            row_default_height: 50
+            col_force_default: True
+            col_default_width: 150
+            pos_hint: {'center_x':.5, 'center_y':.5}
+            size_hint_x: None
+            width: self.minimum_width
+            size_hint_y: None
+            height: self.minimum_height
+            color: 0,0,0,1
+            QueueLabel:
+                text: 'Time'
+            QueueLabel:
+                text: 'Name'
+            QueueLabel:
+                text: 'Boat ID'
+            QueueLabel:
+                text: 'Moved?'
+            QueueLabel:
+                text: 'A5'
+            QueueLabel:
+                text: 'A6'
+
