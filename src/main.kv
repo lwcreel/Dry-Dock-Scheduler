@@ -59,7 +59,7 @@ ScreenManagement:
             text: 'Create Account'
             pos_hint: {"x":.306, "y":.4}
         MyButton:
-            on_release: app.root.current = 'scheduletime'
+            on_release: app.root.current = 'scheduleworker'
             text: 'Contact Dock'
             pos_hint: {"x":.306, "y":.314}
 
@@ -732,6 +732,7 @@ ScreenManagement:
             pos_hint: {"x":.384, "y": .73}
         MyButton:
             id: schedule_button
+            on_release: app.root.current = 'scheduleworker'
             text: 'View Schedule'
             pos_hint: {"x":.306, "y": .55}
         MyButton:
