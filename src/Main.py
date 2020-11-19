@@ -70,6 +70,9 @@ class LogOutConfirmOwner(Screen):
 class ScheduleTime(Screen):
     pass
 
+class ScheduleWorker(Screen):
+    pass
+
 class ScreenManagement(ScreenManager):
     pass
 

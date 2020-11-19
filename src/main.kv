@@ -18,6 +18,7 @@ ScreenManagement:
     LogOutConfirmWorker:
     LogOutConfirmOwner:
     ScheduleTime:
+    ScheduleWorker:
 
 <MyButton@Button>:
     font_size: 20
@@ -825,3 +826,17 @@ ScreenManagement:
             on_release: app.root.current = 'homeowner'
             text: 'Back to Home'
             pos_hint: {"x":.306, "y":.228}
+<ScheduleWorker>:
+    name:'scheduleworker'
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'background.jpg'
+    FloatLayout:
+        Label:
+            id: title
+            text: 'Schedule'
+            color: 0,0,0,1
+            size_hint: .25, .25
+            pos_hint: {"x":.384, "y":.786}
