@@ -3,6 +3,8 @@ from kivy.lang import Builder
 from kivy.core.window import Window
 from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
 from kivy.properties import *
+import itertools
+import heapq
 
 from dbAPI import *
 
@@ -105,6 +107,13 @@ class MainApp(App):
 
     def linkBoat(self, makeAndModel, year):
         createBoat(makeAndModel, self.username, year, 0)
+
+    priorityQueue = []
+    counter = itertools.count()
+    def schedule(self, boatText, nameText, timeValue):
+        queueBoat(boatText, nameText, timeValue)
+        count = next(self.counter)
+        heapq.heappush(self.priorityQueue, (timeValue, count, [boatText, nameText]))
 
     def build(self):
         return presentation

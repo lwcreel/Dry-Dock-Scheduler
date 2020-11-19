@@ -19,7 +19,7 @@ ScreenManagement:
     LogOutConfirmOwner:
     ScheduleTime:
 
-<Button>:
+<MyButton@Button>:
     font_size: 20
     size_hint: .4, .05
 
@@ -49,15 +49,15 @@ ScreenManagement:
             color: 0,0,0,1
             size_hint: .25, .25
             pos_hint: {"x":.384, "y":.552}
-        Button:
+        MyButton:
             on_release: app.root.current = 'questionlogin'
             text: 'Log in'
             pos_hint: {"x":.306, "y":.486}
-        Button:
+        MyButton:
             on_release: app.root.current = 'questioncreate'
             text: 'Create Account'
             pos_hint: {"x":.306, "y":.4}
-        Button:
+        MyButton:
             text: 'Contact Dock'
             pos_hint: {"x":.306, "y":.314}
 
@@ -75,12 +75,12 @@ ScreenManagement:
             color: 0,0,0,1
             size_hint: .25,.25
             pos_hint: {"x":.384, "y":.786}
-        Button:
+        MyButton:
             id: yes_button
             on_release: app.root.current = 'createworker'
             text: 'Yes'
             pos_hint: {"x":.306, "y":.57}
-        Button:
+        MyButton:
             id: no_button
             on_release: app.root.current = 'createowner'
             text: 'No'
@@ -100,12 +100,12 @@ ScreenManagement:
             color: 0,0,0,1
             size_hint: .25,.25
             pos_hint: {"x":.384, "y":.786}
-        Button:
+        MyButton:
             id: yes_button
             on_release: app.root.current = 'loginworker'
             text: 'Yes'
             pos_hint: {"x":.306, "y":.57}
-        Button:
+        MyButton:
             id: no_button
             on_release: app.root.current = 'loginowner'
             text: 'No'
@@ -171,13 +171,13 @@ ScreenManagement:
             hint_text: 'Enter password'
             size_hint: .9, .05
             pos_hint: {"x":.05, "y":.429}
-        Button:
+        MyButton:
             id: create_button
             on_press: app.createAccount(username_input.text, e_mail_input.text, password_input.text, confirm_password_input.text, 0)
             on_release: app.root.current = app.createNextScreen
             text: 'Create Account'
             pos_hint: {"x":.306, "y":.286}
-        Button:
+        MyButton:
             id: return_button
             on_release: app.root.current = 'welcome'
             text: 'Back'
@@ -254,13 +254,13 @@ ScreenManagement:
             hint_text: 'Enter marina code'
             size_hint: .9, .05
             pos_hint: {"x":.05, "y":.314}
-        Button:
+        MyButton:
             id: create_button
             on_press: app.createAccount(username_input.text, e_mail_input.text, password_input.text, confirm_password_input.text, 1)
             on_release: app.root.current = app.createNextScreen
             text: 'Create Account'
             pos_hint: {"x":.306, "y":.2}
-        Button:
+        MyButton:
             id: return_button
             on_release: app.root.current = 'welcome'
             text: 'Back'
@@ -303,19 +303,19 @@ ScreenManagement:
             hint_text: 'Enter password'
             size_hint: .9, .05
             pos_hint: {"x":.05, "y":.657}
-        Button:
+        MyButton:
             id: reset_button
             on_release: app.root.current = 'reset'
             text: 'Forgot your password?'
             font_size: 19
             pos_hint: {"x":.306, "y":.557}
-        Button:
+        MyButton:
             id: log_in_button
             on_press: app.tryLogin(username_input.text, password_input.text, 0)
             on_release: app.root.current = app.loginNextScreen
             text: 'Log In'
             pos_hint: {"x":.306, "y":.471}
-        Button:
+        MyButton:
             id: return_button
             on_release: app.root.current = 'welcome'
             text: 'Back'
@@ -358,19 +358,19 @@ ScreenManagement:
             hint_text: 'Enter password'
             size_hint: .9, .05
             pos_hint: {"x":.05, "y":.657}
-        Button:
+        MyButton:
             id: reset_button
             on_release: app.root.current = 'reset'
             text: 'Forgot your password?'
             font_size: 19
             pos_hint: {"x":.306, "y":.557}
-        Button:
+        MyButton:
             id: log_in_button
             on_press: app.tryLogin(username_input.text, password_input.text, 0)
             on_release: app.root.current = app.loginNextScreen
             text: 'Log In'
             pos_hint: {"x":.306, "y":.471}
-        Button:
+        MyButton:
             id: return_button
             on_release: app.root.current = 'welcome'
             text: 'Back'
@@ -419,19 +419,19 @@ ScreenManagement:
             hint_text: 'Enter password'
             size_hint: .9, .05
             pos_hint: {"x":.05, "y":.657}
-        Button:
+        MyButton:
             id: reset_button
             on_release: app.root.current = 'reset'
             text: 'Forgot your password?'
             font_size: 19
             pos_hint: {"x":.306, "y":.557}
-        Button:
+        MyButton:
             id: log_in_button
             on_press: app.tryLogin(username_input.text, password_input.text, 1)
             on_release: app.root.current = app.loginNextScreen
             text: 'Log In'
             pos_hint: {"x":.306, "y":.471}
-        Button:
+        MyButton:
             id: return_button
             on_release: app.root.current = 'welcome'
             text: 'Back'
@@ -474,19 +474,19 @@ ScreenManagement:
             hint_text: 'Enter password'
             size_hint: .9, .05
             pos_hint: {"x":.05, "y":.657}
-        Button:
+        MyButton:
             id: reset_button
             on_release: app.root.current = 'reset'
             text: 'Forgot your password?'
             font_size: 19
             pos_hint: {"x":.306, "y":.557}
-        Button:
+        MyButton:
             id: log_in_button
             on_press: app.tryLogin(username_input.text, password_input.text, 1)
             on_release: app.root.current = app.loginNextScreen
             text: 'Log In'
             pos_hint: {"x":.306, "y":.471}
-        Button:
+        MyButton:
             id: return_button
             on_release: app.root.current = 'welcome'
             text: 'Back'
@@ -540,13 +540,13 @@ ScreenManagement:
             hint_text: 'Year'
             size_hint: .9, .05
             pos_hint: {"x":.05, "y":.623}
-        Button:
+        MyButton:
             id: link_button
             on_press: app.linkBoat(make_model_input.text, year_input.text)
             on_release: app.root.current = 'linkconfirm'
             text: 'Link Boat to Account'
             pos_hint: {"x":.306, "y":.523}
-        Button:
+        MyButton:
             id: skip_button
             on_release: app.root.current = 'homeowner'
             text: 'Skip for Now'
@@ -593,13 +593,13 @@ ScreenManagement:
             hint_text: 'Year'
             size_hint: .9, .05
             pos_hint: {"x":.05, "y":.623}
-        Button:
+        MyButton:
             id: link_button
             on_press: app.linkBoat(make_model_input.text, year_input.text)
             on_release: app.root.current = 'linkconfirm'
             text: 'Link Boat to Account'
             pos_hint: {"x":.306, "y":.523}
-        Button:
+        MyButton:
             id: return_button
             on_release: app.root.current = 'homeowner'
             text: 'Back to Home'
@@ -619,7 +619,7 @@ ScreenManagement:
             color: 0,0,0,1
             size_hint: .25, .25
             pos_hint: {"x":.384, "y":.786}
-        Button:
+        MyButton:
             id: return_button
             on_release: app.root.current = 'homeowner'
             text: 'Continue'
@@ -650,11 +650,11 @@ ScreenManagement:
             hint_text: 'Enter username/e-mail'
             size_hint: .9, .05
             pos_hint: {"x":.05, "y":.771}
-        Button:
+        MyButton:
             id: reset_button
             text: 'Reset Password'
             pos_hint: {"x":.306, "y":.671}
-        Button:
+        MyButton:
             id: return_button
             on_release: app.root.current = 'welcome'
             text: 'Back'
@@ -680,21 +680,21 @@ ScreenManagement:
             color: 0,0,0,1
             size_hint: .25, .25
             pos_hint: {"x":.384, "y": .73}
-        Button:
+        MyButton:
             id: schedule_button
             on_release: app.root.current = 'scheduletime'
             text: 'Schedule a time'
             pos_hint: {"x":.306, "y": .55}
-        Button:
+        MyButton:
             id: link_button
             on_release: app.root.current = 'link'
             text: 'Link a new boat'
             pos_hint: {"x":.306, "y":.464}
-        Button:
+        MyButton:
             id: contact_button
             text: 'Contact dock'
             pos_hint: {"x":.306, "y":.378}
-        Button:
+        MyButton:
             id: log_out_button
             on_release: app.root.current = 'confirmowner'
             text: 'Log out'
@@ -720,15 +720,15 @@ ScreenManagement:
             color: 0,0,0,1
             size_hint: .25, .25
             pos_hint: {"x":.384, "y": .73}
-        Button:
+        MyButton:
             id: schedule_button
             text: 'View Schedule'
             pos_hint: {"x":.306, "y": .55}
-        Button:
+        MyButton:
             id: contact_button
             text: 'View Open Chats'
             pos_hint: {"x":.306, "y":.464}
-        Button:
+        MyButton:
             id: log_out_button
             on_release: app.root.current = 'confirmworker'
             text: 'Log Out'
@@ -748,12 +748,12 @@ ScreenManagement:
             color: 0,0,0,1
             size_hint: .25,.25
             pos_hint: {"x":.384, "y":.786}
-        Button:
+        MyButton:
             id: yes_button
             on_release: app.root.current = 'welcome'
             text: 'Yes'
             pos_hint: {"x":.306, "y":.57}
-        Button:
+        MyButton:
             id: no_button
             on_release: app.root.current = 'homeworker'
             text: 'No'
@@ -773,12 +773,12 @@ ScreenManagement:
             color: 0,0,0,1
             size_hint: .25,.25
             pos_hint: {"x":.384, "y":.786}
-        Button:
+        MyButton:
             id: yes_button
             on_release: app.root.current = 'welcome'
             text: 'Yes'
             pos_hint: {"x":.306, "y":.57}
-        Button:
+        MyButton:
             id: no_button
             on_release: app.root.current = 'homeowner'
             text: 'No'
@@ -792,7 +792,24 @@ ScreenManagement:
             size: self.size
             source: 'background.jpg'
     FloatLayout:
+        Label:
+            id: title
+            text: 'Scheduler'
+            color: 0,0,0,1
+            size_hint: .25, .25
+            pos_hint: {"x":.384, "y":.786}
         Spinner:
             text: 'Select time to get your boat out'
-            values: 'Select time to get your boat out', '9:00am', '9:15am', '9:30am', '9:45am', '10:00am', '10:15am', '10:30am', '10:45am', '11:00am', '11:15am', '11:30am', '11:45am', '12:00pm', '12:15pm', '12:30pm', '12:45pm', '1:00pm', '1:15pm', '1:30pm', '1:45pm', '2:00pm', '2:15pm', '2:30pm', '2:45pm', '3:00pm', '3:15pm', '3:30pm', '3:45pm', '4:00pm', '4:15pm', '4:30pm', '4:45pm', '5:00pm'
-            pos_hint: {"x": .21, "y":.5}
+            values: '9:00am', '9:15am', '9:30am', '9:45am', '10:00am', '10:15am', '10:30am', '10:45am', '11:00am', '11:15am', '11:30am', '11:45am', '12:00pm', '12:15pm', '12:30pm', '12:45pm', '1:00pm', '1:15pm', '1:30pm', '1:45pm', '2:00pm', '2:15pm', '2:30pm', '2:45pm', '3:00pm', '3:15pm', '3:30pm', '3:45pm', '4:00pm', '4:15pm', '4:30pm', '4:45pm', '5:00pm'
+            pos_hint: {"x": .306, "y":.5}
+            font_size: 20
+            size_hint: .4, .05
+        MyButton:
+            on_release: app.root.current = 'homeowner'
+            text: 'Confirm'
+            pos_hint: {"x":.306, "y":.314}
+        MyButton:
+            id: return_button
+            on_release: app.root.current = 'homeowner'
+            text: 'Back to Home'
+            pos_hint: {"x":.306, "y":.228}
