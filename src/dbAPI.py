@@ -141,6 +141,16 @@ def getStatus(username):
 def changePassword(username, email, password):
     db = sqlite3.connect(path)
     c = db.cursor()
-    c.execute('UPDATE Users SET password=? WHERE name=? AND email=?', (password, username, email))
+
+    # attempt to fetch corresponding User
+    c.execute('SELECT name, email FROM Users WHERE name=? AND password=?', (username, email))
+    if c.fetchone() is not None:
+        return True
+
+        # update if valid
+        c.execute('UPDATE Users SET password=? WHERE name=? AND email=?', (password, username, email))
+    else:
+        return False
+
     db.commit()
     db.close()
