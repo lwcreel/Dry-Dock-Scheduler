@@ -2,6 +2,7 @@ from kivy.app import App
 from kivy.lang import Builder
 from kivy.core.window import Window
 from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
+from kivy.uix.label import Label
 from kivy.properties import *
 import itertools
 import heapq
@@ -68,6 +69,15 @@ class ScheduleTime(Screen):
 class ScreenManagement(ScreenManager):
     pass
 
+class BoatStatus(Label):
+    BoatStatusLabel = StringProperty("")
+    def getStatusBoat(self, username):
+        value = getStatus(username)
+        if(value == 0):
+            self.text = 'Your boat is in the dry dock'
+        else:
+            self.text = 'Your boat is in the water'
+
 
 
 presentation = Builder.load_file("main.kv")
@@ -121,10 +131,12 @@ class MainApp(App):
         count = next(self.counter)
         heapq.heappush(self.priorityQueue, (time, count, [self.bid, self.username]))
 
+    
 
     def build(self):
         return presentation
 
+   
 
 
 MainApp().run()

@@ -129,3 +129,11 @@ def clearSlip(location):
 
     return "slip cleared"
 
+
+def getStatus(username):
+    db = sqlite3.connect(path)
+    c = db.cursor()
+    c.execute('SELECT location FROM boats WHERE name=?',username)
+    value = c.fetchone()
+    db.close()
+    return value[4]

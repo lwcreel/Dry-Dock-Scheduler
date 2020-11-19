@@ -18,6 +18,7 @@ ScreenManagement:
     LogOutConfirmWorker:
     LogOutConfirmOwner:
     ScheduleTime:
+    BoatStatus:
 
 <MyButton@Button>:
     font_size: 20
@@ -695,11 +696,17 @@ ScreenManagement:
             id: contact_button
             text: 'Contact dock'
             pos_hint: {"x":.306, "y":.378}
+        BoatStatus: 
+            id: boat_status
+            text: root.BoatStatusLabel
+            color: 0,0,0,1
+            size_hint: .25,.25
+            pos_hint: {"x":.384, "y":.292}
         MyButton:
             id: log_out_button
             on_release: app.root.current = 'confirmowner'
             text: 'Log out'
-            pos_hint: {"x":.306, "y":.292}
+            pos_hint: {"x":.306, "y":.191}
 
 <HomeScreenWorker>:
     name: 'homeworker'
