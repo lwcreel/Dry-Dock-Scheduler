@@ -138,7 +138,7 @@ def getStatus(username):
     db.close()
     return value[0]
 
-def changePassword(username, email, password):
+def changePassword(username, email, password, cpassword):
     db = sqlite3.connect(path)
     c = db.cursor()
 
@@ -146,9 +146,12 @@ def changePassword(username, email, password):
     c.execute('SELECT name, email FROM Users WHERE name=? AND email=?', (username, email))
     if c.fetchone() is not None:
         # update if valid
-        c.execute('UPDATE Users SET password=? WHERE name=? AND email=?', (password, username, email))
-        db.commit()
-        db.close()
-        return True
+        if(password == cpassword):
+            c.execute('UPDATE Users SET password=? WHERE name=? AND email=?', (password, username, email))
+            db.commit()
+            db.close()
+            return True
+        else:
+            return False
     else:
         return False

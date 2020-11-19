@@ -49,11 +49,11 @@ class LinkConfirm(Screen):
 
 class ResetPassword(Screen):
     def resetPassword(self, username, email):
-        value = changePassword(username, email, 'temp1')
+        value = changePassword(username, email, 'temp1', 'temp1')
         if(value):
             self.label_wid.text = 'Success! Temporary password is temp1, please change after logging in.'
         else:
-            self.label_wid.text = 'Oops! The username and/or email do no match an account in our records. Please try again.'
+            self.label_wid.text = 'Oops! Something was wrong with your entries. Please try again.'
 
 class HomeScreenOwner(Screen):
     def getStatusBoat(self, username):
@@ -65,6 +65,22 @@ class HomeScreenOwner(Screen):
 
 class HomeScreenWorker(Screen):
     pass
+
+class LoggedInChangePasswordOwner(Screen):
+    def resetPassword(self, username, email, password, cpassword):
+        value = changePassword(username, email, password, cpassword)
+        if(value):
+            self.label_wid.text = 'Success! Your new password has been set!'
+        else:
+            self.label_wid.text = 'Oops! Something was wrong with your entries. Please try again.'
+
+class LoggedInChangePasswordWorker(Screen):
+    def resetPassword(self, username, email, password, cpassword):
+        value = changePassword(username, email, password, cpassword)
+        if(value):
+            self.label_wid.text = 'Success! Your new password has been set!'
+        else:
+            self.label_wid.text = 'Oops! Something was wrong with your entries. Please try again.'
 
 class LogOutConfirmWorker(Screen):
     pass
