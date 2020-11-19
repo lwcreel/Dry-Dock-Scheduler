@@ -145,12 +145,10 @@ def changePassword(username, email, password):
     # attempt to fetch corresponding User
     c.execute('SELECT name, email FROM Users WHERE name=? AND email=?', (username, email))
     if c.fetchone() is not None:
-        return True
-
         # update if valid
         c.execute('UPDATE Users SET password=? WHERE name=? AND email=?', (password, username, email))
+        db.commit()
+        db.close()
+        return True
     else:
         return False
-
-    db.commit()
-    db.close()

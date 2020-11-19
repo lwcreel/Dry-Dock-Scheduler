@@ -48,7 +48,12 @@ class LinkConfirm(Screen):
     pass
 
 class ResetPassword(Screen):
-    pass
+    def resetPassword(self, username, email):
+        value = changePassword(username, email, 'temp1')
+        if(value):
+            self.label_wid.text = 'Success! Temporary password is temp1, please change after logging in.'
+        else:
+            self.label_wid.text = 'Oops! The username and/or email do no match an account in our records. Please try again.'
 
 class HomeScreenOwner(Screen):
     def getStatusBoat(self, username):
