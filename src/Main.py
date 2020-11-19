@@ -6,7 +6,6 @@ from kivy.uix.label import Label
 from kivy.properties import *
 import itertools
 import heapq
-
 from dbAPI import *
 
 Window.size = (500, 700)
@@ -52,7 +51,12 @@ class ResetPassword(Screen):
     pass
 
 class HomeScreenOwner(Screen):
-    pass
+    def getStatusBoat(self, username):
+        value = getStatus(username)
+        if(value == 0):
+            self.label_wid.text = 'Your boat is in the dry dock'
+        else:
+            self.label_wid.text = 'Your boat is in the water'
 
 class HomeScreenWorker(Screen):
     pass
@@ -68,17 +72,6 @@ class ScheduleTime(Screen):
 
 class ScreenManagement(ScreenManager):
     pass
-
-class BoatStatus(Label):
-    BoatStatusLabel = StringProperty("")
-    def getStatusBoat(self, username):
-        value = getStatus(username)
-        if(value == 0):
-            self.text = 'Your boat is in the dry dock'
-        else:
-            self.text = 'Your boat is in the water'
-
-
 
 presentation = Builder.load_file("main.kv")
 

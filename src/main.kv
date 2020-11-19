@@ -18,7 +18,6 @@ ScreenManagement:
     LogOutConfirmWorker:
     LogOutConfirmOwner:
     ScheduleTime:
-    BoatStatus:
 
 <MyButton@Button>:
     font_size: 20
@@ -664,6 +663,7 @@ ScreenManagement:
 
 <HomeScreenOwner>:
     name: 'homeowner'
+    label_wid: boat_status
     canvas.before:
         Rectangle:
             pos: self.pos
@@ -682,6 +682,12 @@ ScreenManagement:
             color: 0,0,0,1
             size_hint: .25, .25
             pos_hint: {"x":.384, "y": .73}
+        Label:
+            id: boat_status
+            text: ''
+            color: 0,0,0,1
+            size_hint: .25,.25
+            pos_hint: {"x":.382, "y":.53}
         MyButton:
             id: schedule_button
             on_release: app.root.current = 'scheduletime'
@@ -694,19 +700,14 @@ ScreenManagement:
             pos_hint: {"x":.306, "y":.464}
         MyButton:
             id: contact_button
+            on_press: root.getStatusBoat(app.username)
             text: 'Contact dock'
             pos_hint: {"x":.306, "y":.378}
-        BoatStatus: 
-            id: boat_status
-            text: root.BoatStatusLabel
-            color: 0,0,0,1
-            size_hint: .25,.25
-            pos_hint: {"x":.384, "y":.292}
         MyButton:
             id: log_out_button
             on_release: app.root.current = 'confirmowner'
             text: 'Log out'
-            pos_hint: {"x":.306, "y":.191}
+            pos_hint: {"x":.306, "y":.292}
 
 <HomeScreenWorker>:
     name: 'homeworker'
