@@ -143,7 +143,7 @@ def changePassword(username, email, password):
     c = db.cursor()
 
     # attempt to fetch corresponding User
-    c.execute('SELECT name, email FROM Users WHERE name=? AND password=?', (username, email))
+    c.execute('SELECT name, email FROM Users WHERE name=? AND email=?', (username, email))
     if c.fetchone() is not None:
         return True
 
