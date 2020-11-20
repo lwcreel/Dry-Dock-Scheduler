@@ -64,6 +64,10 @@ ScreenManagement:
             on_release: app.root.current = 'questioncreate'
             text: 'Create Account'
             pos_hint: {"x":.306, "y":.4}
+        MyButton:
+            on_release: app.root.current = 'scheduleworker'
+            text: 'Schedule'
+            pos_hint: {"x":.306, "y":.2}
 
 <WorkerQuestionCreate>:
     name: 'questioncreate'
@@ -1033,7 +1037,7 @@ ScreenManagement:
                     pos: self.pos
                     size: self.size
             id: schedulequeue
-            rows: 15
+            rows: 10
             cols: 4
             row_force_default: True
             row_default_height: 50
@@ -1053,7 +1057,13 @@ ScreenManagement:
                 text: 'Boat ID'
             QueueLabel:
                 text: 'Moved?'
-            QueueLabel:
-                text: 'A5'
-            QueueLabel:
-                text: 'A6'
+        MyButton:
+            id: refresh_button
+            on_release: root.refresh()
+            text: 'Refresh'
+            pos_hint: {"x":.306, "y":.1}
+        MyButton:
+            id: return_button
+            on_release: app.root.current = 'homeworker'
+            text: 'Back to Home'
+            pos_hint: {"x":.306, "y":.04}

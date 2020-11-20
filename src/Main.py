@@ -3,6 +3,7 @@ from kivy.lang import Builder
 from kivy.core.window import Window
 from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
 from kivy.uix.label import Label
+from kivy.uix.gridlayout import GridLayout
 from kivy.properties import *
 import itertools
 import heapq
@@ -92,7 +93,22 @@ class ScheduleTime(Screen):
     pass
 
 class ScheduleWorker(Screen):
-    pass
+    def refresh(self):
+        if(len(MainApp.priorityQueue) != 0):
+            layout = GridLayout(cols=1, pos=(1, 10))
+            for i in range(len(MainApp.priorityQueue)):
+                print('I draw label')
+                layout.add_widget(Label(text='hello'))
+
+    def numToTime(self, num):
+        min = num % 100
+        num = num / 100
+        if num < 12:
+            time = 'am'
+        else:
+            time = 'pm'
+        time = num + ':' + min + time
+        return time
 
 class ScreenManagement(ScreenManager):
     pass
@@ -135,7 +151,7 @@ class MainApp(App):
     def linkBoat(self, makeAndModel, year):
         createBoat(makeAndModel, self.username, year, 0)
 
-    priorityQueue = []
+    priorityQueue = [915, 0, [-1, 'test']]
     counter = itertools.count()
     def schedule(self, timeValue):
         queueBoat(self.bid, self.username, timeValue)
