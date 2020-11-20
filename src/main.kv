@@ -6,9 +6,7 @@ ScreenManagement:
     CreateAccountOwner:
     CreateAccountWorker:
     LogInOwner:
-    LogInOwnerFailed:
     LogInWorker:
-    LogInWorkerFailed:
     NewAccountLinkBoat:
     LinkBoat:
     LinkConfirm:
@@ -118,6 +116,7 @@ ScreenManagement:
 
 <CreateAccountOwner>:
     name: 'createowner'
+    label_wid: fail_tag
     canvas.before:
         Rectangle:
             pos: self.pos
@@ -176,9 +175,15 @@ ScreenManagement:
             hint_text: 'Enter password'
             size_hint: .9, .05
             pos_hint: {"x":.05, "y":.429}
+        Label:
+            id: fail_tag
+            text: ''
+            color: 1,0,0,1
+            size_hint: .25, .25
+            pos_hint: {"x":.382, "y":.25}
         MyButton:
             id: create_button
-            on_press: app.createAccount(username_input.text, e_mail_input.text, password_input.text, confirm_password_input.text, 0)
+            on_press: root.createAccount(username_input.text, e_mail_input.text, password_input.text, confirm_password_input.text, 0)
             on_release: app.root.current = app.createNextScreen
             text: 'Create Account'
             pos_hint: {"x":.306, "y":.286}
@@ -190,6 +195,7 @@ ScreenManagement:
 
 <CreateAccountWorker>:
     name: 'createworker'
+    label_wid: fail_tag
     canvas.before:
         Rectangle:
             pos: self.pos
@@ -249,30 +255,26 @@ ScreenManagement:
             size_hint: .9, .05
             pos_hint: {"x":.05, "y":.429}
         Label:
-            id: marina_tag
-            text: 'Marina code'
-            color: 0,0,0,1
+            id: fail_tag
+            text: ''
+            color: 1,0,0,1
             size_hint: .25, .25
-            pos_hint: {"x":.02, "y": .256}
-        TextInput:
-            id: marina_input
-            hint_text: 'Enter marina code'
-            size_hint: .9, .05
-            pos_hint: {"x":.05, "y":.314}
+            pos_hint: {"x":.382, "y":.25}
         MyButton:
             id: create_button
-            on_press: app.createAccount(username_input.text, e_mail_input.text, password_input.text, confirm_password_input.text, 1)
+            on_press: root.createAccount(username_input.text, e_mail_input.text, password_input.text, confirm_password_input.text, 1)
             on_release: app.root.current = app.createNextScreen
             text: 'Create Account'
-            pos_hint: {"x":.306, "y":.2}
+            pos_hint: {"x":.306, "y":.286}
         MyButton:
             id: return_button
             on_release: app.root.current = 'welcome'
             text: 'Back'
-            pos_hint: {"x":.306, "y":.114}
+            pos_hint: {"x":.306, "y":.2}
 
 <LogInOwner>:
     name: 'loginowner'
+    label_wid: fail_tag
     canvas.before:
         Rectangle:
             pos: self.pos
@@ -284,7 +286,7 @@ ScreenManagement:
             text: 'Log In'
             color: 0,0,0,1
             size_hint: .25, .25
-            pos_hint: {"x":.384, "y":.786}
+            pos_hint: {"x":.38, "y":.786}
         Label:
             id: username_tag
             text: 'Username'
@@ -308,87 +310,33 @@ ScreenManagement:
             hint_text: 'Enter password'
             size_hint: .9, .05
             pos_hint: {"x":.05, "y":.657}
-        MyButton:
-            id: reset_button
-            on_release: app.root.current = 'reset'
-            text: 'Forgot your password?'
-            font_size: 19
-            pos_hint: {"x":.306, "y":.557}
-        MyButton:
-            id: log_in_button
-            on_press: app.tryLogin(username_input.text, password_input.text, 0)
-            on_release: app.root.current = app.loginNextScreen
-            text: 'Log In'
-            pos_hint: {"x":.306, "y":.471}
-        MyButton:
-            id: return_button
-            on_release: app.root.current = 'welcome'
-            text: 'Back'
-            pos_hint: {"x":.306, "y":.385}
-
-<LogInOwnerFailed>:
-    name: 'loginownerfailed'
-    canvas.before:
-        Rectangle:
-            pos: self.pos
-            size: self.size
-            source: 'background.jpg'
-    FloatLayout:
         Label:
-            id: login_title
-            text: 'Log In'
-            color: 0,0,0,1
-            size_hint: .25, .25
-            pos_hint: {"x":.384, "y":.786}
-        Label:
-            id: username_tag
-            text: 'Username'
-            color: 0,0,0,1
-            size_hint: .25, .25
-            pos_hint: {"x":0, "y":.714}
-        TextInput:
-            id: username_input
-            hint_text: 'Enter username'
-            size_hint: .9, .05
-            pos_hint: {"x":.05, "y":.771}
-        Label:
-            id: password_tag
-            text: 'Password'
-            color: 0,0,0,1
-            size_hint: .25, .25
-            pos_hint: {"x":.02, "y":.6}
-        TextInput:
-            id: password_input
-            password: True
-            hint_text: 'Enter password'
-            size_hint: .9, .05
-            pos_hint: {"x":.05, "y":.657}
-        MyButton:
-            id: reset_button
-            on_release: app.root.current = 'reset'
-            text: 'Forgot your password?'
-            font_size: 19
-            pos_hint: {"x":.306, "y":.557}
-        MyButton:
-            id: log_in_button
-            on_press: app.tryLogin(username_input.text, password_input.text, 0)
-            on_release: app.root.current = app.loginNextScreen
-            text: 'Log In'
-            pos_hint: {"x":.306, "y":.471}
-        MyButton:
-            id: return_button
-            on_release: app.root.current = 'welcome'
-            text: 'Back'
-            pos_hint: {"x":.306, "y":.385}
-        Label:
-            id: flash_notice
-            text: 'Login Failed'
+            id: fail_tag
+            text: ''
             color: 1,0,0,1
             size_hint: .25, .25
-            pos_hint: {"x":0.384, "y":.2}
+            pos_hint: {"x":.376, "y":.481}
+        MyButton:
+            id: reset_button
+            on_release: app.root.current = 'reset'
+            text: 'Forgot your password?'
+            font_size: 19
+            pos_hint: {"x":.306, "y":.507}
+        MyButton:
+            id: log_in_button
+            on_press: root.tryLogin(username_input.text, password_input.text, 0)
+            on_release: app.root.current = app.loginNextScreen
+            text: 'Log In'
+            pos_hint: {"x":.306, "y":.421}
+        MyButton:
+            id: return_button
+            on_release: app.root.current = 'welcome'
+            text: 'Back'
+            pos_hint: {"x":.306, "y":.335}
 
 <LogInWorker>:
     name: 'loginworker'
+    label_wid: fail_tag
     canvas.before:
         Rectangle:
             pos: self.pos
@@ -424,84 +372,29 @@ ScreenManagement:
             hint_text: 'Enter password'
             size_hint: .9, .05
             pos_hint: {"x":.05, "y":.657}
-        MyButton:
-            id: reset_button
-            on_release: app.root.current = 'reset'
-            text: 'Forgot your password?'
-            font_size: 19
-            pos_hint: {"x":.306, "y":.557}
-        MyButton:
-            id: log_in_button
-            on_press: app.tryLogin(username_input.text, password_input.text, 1)
-            on_release: app.root.current = app.loginNextScreen
-            text: 'Log In'
-            pos_hint: {"x":.306, "y":.471}
-        MyButton:
-            id: return_button
-            on_release: app.root.current = 'welcome'
-            text: 'Back'
-            pos_hint: {"x":.306, "y":.385}
-
-<LogInWorkerFailed>:
-    name: 'loginworkerfailed'
-    canvas.before:
-        Rectangle:
-            pos: self.pos
-            size: self.size
-            source: 'background.jpg'
-    FloatLayout:
         Label:
-            id: login_title
-            text: 'Log In'
-            color: 0,0,0,1
-            size_hint: .25, .25
-            pos_hint: {"x":.384, "y":.786}
-        Label:
-            id: username_tag
-            text: 'Username'
-            color: 0,0,0,1
-            size_hint: .25, .25
-            pos_hint: {"x":0, "y":.714}
-        TextInput:
-            id: username_input
-            hint_text: 'Enter username'
-            size_hint: .9, .05
-            pos_hint: {"x":.05, "y":.771}
-        Label:
-            id: password_tag
-            text: 'Password'
-            color: 0,0,0,1
-            size_hint: .25, .25
-            pos_hint: {"x":.02, "y":.6}
-        TextInput:
-            id: password_input
-            password: True
-            hint_text: 'Enter password'
-            size_hint: .9, .05
-            pos_hint: {"x":.05, "y":.657}
-        MyButton:
-            id: reset_button
-            on_release: app.root.current = 'reset'
-            text: 'Forgot your password?'
-            font_size: 19
-            pos_hint: {"x":.306, "y":.557}
-        MyButton:
-            id: log_in_button
-            on_press: app.tryLogin(username_input.text, password_input.text, 1)
-            on_release: app.root.current = app.loginNextScreen
-            text: 'Log In'
-            pos_hint: {"x":.306, "y":.471}
-        MyButton:
-            id: return_button
-            on_release: app.root.current = 'welcome'
-            text: 'Back'
-            pos_hint: {"x":.306, "y":.385}        
-        Label:
-            id: flash_notice
-            text: 'Login Failed'
+            id: fail_tag
+            text: ''
             color: 1,0,0,1
             size_hint: .25, .25
-            pos_hint: {"x":0.384, "y":.2}
+            pos_hint: {"x":.376, "y":.481}
+        MyButton:
+            id: reset_button
+            on_release: app.root.current = 'reset'
+            text: 'Forgot your password?'
+            font_size: 19
+            pos_hint: {"x":.306, "y":.507}
+        MyButton:
+            id: log_in_button
+            on_press: root.tryLogin(username_input.text, password_input.text, 1)
+            on_release: app.root.current = app.loginNextScreen
+            text: 'Log In'
+            pos_hint: {"x":.306, "y":.421}
+        MyButton:
+            id: return_button
+            on_release: app.root.current = 'welcome'
+            text: 'Back'
+            pos_hint: {"x":.306, "y":.335}
 
 <NewAccountLinkBoat>:
     name: 'newlink'

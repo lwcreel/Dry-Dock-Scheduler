@@ -65,7 +65,7 @@ def createUser(name, email, pwd, cpwd, isWorker):
     if c.fetchone() is not None:
         return False
     else:
-        if (pwd == cpwd):
+        if (pwd == cpwd) and (name != '') and (email != '') and (pwd != '') and (cpwd != ''):
             if (isWorker):
                 c.execute('INSERT INTO Users (name, email, password, user_id, is_worker) VALUES (?,?,?,?,1)', (name, email, pwd, uID)) # change to hash
                 db.commit() 
