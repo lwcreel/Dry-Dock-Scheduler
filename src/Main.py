@@ -130,6 +130,9 @@ class ScheduleWorker(Screen):
         time = str(num) + ':' + minstr + time
         return time
 
+class MoveBoatToDock(Screen):
+    pass
+
 class ScreenManagement(ScreenManager):
     pass
 
@@ -187,7 +190,8 @@ class MainApp(App):
         self.priorityQueue.sort()
         print(self.priorityQueue[0])
 
-    
+    def changeLocation(self, boatID):
+        moveBoat(boatID, 0)
 
     def build(self):
         return presentation
