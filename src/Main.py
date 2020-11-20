@@ -5,12 +5,12 @@ from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
 from kivy.uix.label import Label
 from kivy.uix.gridlayout import GridLayout
 from kivy.properties import *
+
 import itertools
 import heapq
 from dbAPI import *
 
 Window.size = (500, 700)
-
 
 class WelcomeScreen(Screen):
     pass
@@ -93,21 +93,41 @@ class ScheduleTime(Screen):
     pass
 
 class ScheduleWorker(Screen):
+    displayedItems = ['','','','','','','','','','']
+    label_value = ListProperty(displayedItems)
     def refresh(self):
-        if(len(MainApp.priorityQueue) != 0):
-            layout = GridLayout(cols=1, pos=(1, 10))
-            for i in range(len(MainApp.priorityQueue)):
-                print('I draw label')
-                layout.add_widget(Label(text='hello'))
+        if(len(MainApp.priorityQueue) < 10):
+            for i in range(10):
+                if(i < len(MainApp.priorityQueue)):
+                    self.displayedItems[i] = self.numToTime(MainApp.priorityQueue[i][0]) + '   ' + MainApp.priorityQueue[i][2][1] + '   ' + str(MainApp.priorityQueue[i][2][0])
+                else:
+                    self.displayedItems[i] = ''
+        else:
+            for i in range(10):
+                self.displayedItems[i] = self.numToTime(MainApp.priorityQueue[i][0]) + '   ' + MainApp.priorityQueue[i][2][1] + '   ' + str(MainApp.priorityQueue[i][2][0])
+        self.label_value = self.displayedItems
+
+    def removeFromQueue(self):
+        val = heapq.heappop(MainApp.priorityQueue)
+        print(val[2][0])
+        dequeueBoat(str(val[2][0]))
 
     def numToTime(self, num):
         min = num % 100
-        num = num / 100
+        num = num // 100
         if num < 12:
             time = 'am'
-        else:
+        elif num == 12:
             time = 'pm'
-        time = num + ':' + min + time
+        else:
+            num -= 12
+            time = 'pm'
+        minstr = ''
+        if min == 0:
+            minstr = '00'
+        else:
+            minstr = str(min)
+        time = str(num) + ':' + minstr + time
         return time
 
 class ScreenManagement(ScreenManager):
@@ -151,17 +171,21 @@ class MainApp(App):
     def linkBoat(self, makeAndModel, year):
         createBoat(makeAndModel, self.username, year, 0)
 
-    priorityQueue = [915, 0, [-1, 'test']]
-    counter = itertools.count()
+    priorityQueue = []
+    #heapq.heappush(priorityQueue, (915, 0, [-1, 'test']))
+    counter = 0
     def schedule(self, timeValue):
+        self.bid = getBoatID(self.username)
         queueBoat(self.bid, self.username, timeValue)
         timeCalc = timeValue.split(':')
         if timeCalc[1][2] == 'p' and timeCalc[0] != '12':
             time = int(str((int(timeCalc[0])+12)) + timeCalc[1][:2])
         else:
             time = int(timeCalc[0] + timeCalc[1][:2])
-        count = next(self.counter)
-        heapq.heappush(self.priorityQueue, (time, count, [self.bid, self.username]))
+        self.counter+=1
+        heapq.heappush(self.priorityQueue, (time, self.counter, [self.bid, self.username]))
+        self.priorityQueue.sort()
+        print(self.priorityQueue[0])
 
     
 

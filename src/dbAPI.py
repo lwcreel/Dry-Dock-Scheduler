@@ -40,18 +40,17 @@ def queueBoat(boatID, ownerID, timeRequested):
     return "Your request has been added to the queue! Request ID: " + str(rID)
 
 # boatID not needed for only one boat per user
-def dequeueBoat(boatID, ownerID, requestID, location):
+def dequeueBoat(boatID):
     # connect to database
     db = sqlite3.connect(path)
     c  = db.cursor()
 
     # update database
-    c.execute('DELETE FROM Requests WHERE request_id=?', requestID)
-    c.execute('UPDATE Users SET request_id=NULL WHERE user_id=?', ownerID)
+    c.execute('DELETE FROM Requests WHERE boat_id=?', (boatID,))
+    c.execute('UPDATE Users SET request_id=NULL WHERE boat_id=?', (boatID,))
+    c.execute('UPDATE Boats SET location=1 WHERE id=?', (boatID,))
     db.commit() 
     db.close()
-
-    clearSlip(location)
 
     return "Your request has been completed, thank you for choosing our marina!"
 
@@ -155,3 +154,12 @@ def changePassword(username, email, password, cpassword):
             return False
     else:
         return False
+
+def getBoatID(username):
+    db = sqlite3.connect(path)
+    c = db.cursor()
+    c.execute('SELECT boat_id FROM Users WHERE name=?', (username,))
+    value = c.fetchone()
+    if value is not None:
+        db.close()
+        return value[0]

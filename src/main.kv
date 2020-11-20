@@ -64,10 +64,6 @@ ScreenManagement:
             on_release: app.root.current = 'questioncreate'
             text: 'Create Account'
             pos_hint: {"x":.306, "y":.4}
-        MyButton:
-            on_release: app.root.current = 'scheduleworker'
-            text: 'Schedule'
-            pos_hint: {"x":.306, "y":.2}
 
 <WorkerQuestionCreate>:
     name: 'questioncreate'
@@ -1028,42 +1024,97 @@ ScreenManagement:
             color: 0,0,0,1
             size_hint: .25, .25
             font_size: 40
-            pos_hint: {"x":.384, "y":.786}
-        GridLayout:
-            canvas.before:
-                Color:
-                    rgba: 1,1,1,1
-                Rectangle:
-                    pos: self.pos
-                    size: self.size
-            id: schedulequeue
-            rows: 10
-            cols: 4
-            row_force_default: True
-            row_default_height: 50
-            col_force_default: True
-            col_default_width: 150
-            pos_hint: {'center_x':.5, 'center_y':.5}
-            size_hint_x: None
-            width: self.minimum_width
-            size_hint_y: None
-            height: self.minimum_height
+            pos_hint: {"x":.38, "y":.786}
+        Label:
+            id: header
+            text: 'Time   Name   Boat ID'
             color: 0,0,0,1
-            QueueLabel:
-                text: 'Time'
-            QueueLabel:
-                text: 'Name'
-            QueueLabel:
-                text: 'Boat ID'
-            QueueLabel:
-                text: 'Moved?'
+            size_hint: .25, .25
+            font_size: 30
+            pos_hint: {"x":.38, "y":.7}
+        Label:
+            id: item_1
+            text: root.label_value[0]
+            color: 0,0,0,1
+            size_hint: .25, .25
+            font_size: 20
+            pos_hint: {"x":.382, "y":.65}
+        Label:
+            id: item_2
+            text: root.label_value[1]
+            color: 0,0,0,1
+            size_hint: .25, .25
+            font_size: 20
+            pos_hint: {"x":.382, "y":.6}
+        Label:
+            id: item_3
+            text: root.label_value[2]
+            color: 0,0,0,1
+            size_hint: .25, .25
+            font_size: 20
+            pos_hint: {"x":.382, "y":.55}
+        Label:
+            id: item_4
+            text: root.label_value[3]
+            color: 0,0,0,1
+            size_hint: .25, .25
+            font_size: 20
+            pos_hint: {"x":.382, "y":.5}
+        Label:
+            id: item_5
+            text: root.label_value[4]
+            color: 0,0,0,1
+            size_hint: .25, .25
+            font_size: 20
+            pos_hint: {"x":.382, "y":.45}
+        Label:
+            id: item_6
+            text: root.label_value[5]
+            color: 0,0,0,1
+            size_hint: .25, .25
+            font_size: 20
+            pos_hint: {"x":.382, "y":.4}
+        Label:
+            id: item_7
+            text: root.label_value[6]
+            color: 0,0,0,1
+            size_hint: .25, .25
+            font_size: 20
+            pos_hint: {"x":.382, "y":.35}
+        Label:
+            id: item_8
+            text: root.label_value[7]
+            color: 0,0,0,1
+            size_hint: .25, .25
+            font_size: 20
+            pos_hint: {"x":.382, "y":.3}
+        Label:
+            id: item_9
+            text: root.label_value[8]
+            color: 0,0,0,1
+            size_hint: .25, .25
+            font_size: 20
+            pos_hint: {"x":.382, "y":.25}
+        Label:
+            id: item_10
+            text: root.label_value[9]
+            color: 0,0,0,1
+            size_hint: .25, .25
+            font_size: 20
+            pos_hint: {"x":.382, "y":.25}
         MyButton:
             id: refresh_button
             on_release: root.refresh()
             text: 'Refresh'
-            pos_hint: {"x":.306, "y":.1}
+            pos_hint: {"x":.306, "y":.222}
+        MyButton:
+            id: pop_button
+            on_press: root.removeFromQueue()
+            on_release: root.refresh()
+            text: 'Fulfill Request'
+            pos_hint: {"x":.306, "y":.136}
         MyButton:
             id: return_button
             on_release: app.root.current = 'homeworker'
             text: 'Back to Home'
-            pos_hint: {"x":.306, "y":.04}
+            pos_hint: {"x":.306, "y":.05}
